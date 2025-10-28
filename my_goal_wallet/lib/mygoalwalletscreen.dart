@@ -8,13 +8,14 @@ class MyGoalWalletScreen extends StatefulWidget {
 }
 
 class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
-  //Inputs: target amount, saving per week, starting balance.
+  //read and control the inputs: target amount, saving per week, starting balance
   TextEditingController targetAmount = TextEditingController();
   TextEditingController saving = TextEditingController();
   TextEditingController balance = TextEditingController();
+  //Declare the default goal type
   String selectGoalType = "Others";
 
-  //Track if a field has an error for border color
+  //Declaration for track if a field has an error
   bool targetError = false;
   bool savingError = false;
   bool balanceError = false;
@@ -32,7 +33,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
           ),
         ),
         backgroundColor: Colors.amber[50],
-        elevation: 0, //remove default shadow (to blend with the backgroud)
+        elevation: 0, //remove default shadow (to blend with the background)
       ),
       //Container
       body: Center(
@@ -97,7 +98,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                         decoration: InputDecoration(
                           hintText: "Enter your target amount",
                           hintStyle: TextStyle(fontSize: 14),
-                          border: OutlineInputBorder(),
+                          //When the field is NOT focused
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: targetError
@@ -106,10 +107,11 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                               width: 2,
                             ),
                           ),
+                          //When the user is typing (field focused)
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: targetError
-                                  ? Colors.red.shade400
+                                  ? Color.fromARGB(255, 207, 58, 56)
                                   : Colors.brown.shade400,
                               width: 2,
                             ),
@@ -158,7 +160,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                         decoration: InputDecoration(
                           hintText: "Enter your planning saving",
                           hintStyle: TextStyle(fontSize: 14),
-                          border: OutlineInputBorder(),
+                          //When the field is NOT focused
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: savingError
@@ -167,10 +169,11 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                               width: 2,
                             ),
                           ),
+                          //When the user is typing (field focused)
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: savingError
-                                  ? Colors.red.shade400
+                                  ? Color.fromARGB(255, 207, 58, 56)
                                   : Colors.brown.shade400,
                               width: 2,
                             ),
@@ -219,7 +222,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                         decoration: InputDecoration(
                           hintText: "Enter your starting balance",
                           hintStyle: TextStyle(fontSize: 14),
-                          border: OutlineInputBorder(),
+                          //When the field is NOT focused
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: balanceError
@@ -228,10 +231,11 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                               width: 2,
                             ),
                           ),
+                          //When the user is typing (field focused)
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: balanceError
-                                  ? Colors.red.shade400
+                                  ? const Color.fromARGB(255, 207, 58, 56)
                                   : Colors.brown.shade400,
                               width: 2,
                             ),
@@ -347,13 +351,16 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
   }
 
   void calculateWeeks() {
+    //updating the declaration earlier at the class level. (rebuild the UI)
     setState(() {
       targetError = false;
       savingError = false;
       balanceError = false;
     });
 
-    double target = double.tryParse(targetAmount.text) ?? 0; //must be >0
+    //convert the string to a number
+    //invalid or empty input is treated as 0 (must be >0)
+    double target = double.tryParse(targetAmount.text) ?? 0;
     double savePerWeek = double.tryParse(saving.text) ?? 0; //must be >0
     double? startBalance = double.tryParse(balance.text); //allow 0
 
@@ -362,7 +369,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
 
     if (target <= 0) {
       targetError = true;
-      hasError = true;
+      hasError = true; //to mark that validation failed
     }
 
     if (savePerWeek <= 0) {
@@ -381,8 +388,11 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
     }
 
     //calculation part
+    //how much more money is needed to reach the target
     double remaining = target - startBalance!;
+    //exact number of weeks needed to reach the target
     double exactWeeks = remaining / savePerWeek;
+    //floor(whole number of weeks (drops the decimal)
     int fullWeeks = exactWeeks.floor();
     int extraDays = ((exactWeeks - fullWeeks) * 7).ceil();
 
@@ -407,7 +417,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.brown.shade800, // brown color
+                backgroundColor: Colors.brown.shade800,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
