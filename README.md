@@ -4,6 +4,7 @@ Project Name : My Goal Wallet App.
 Description: My Goal Wallet App is a straightforward Flutter application that illustrates how weekly savings are calculated. The target amount, weekly planned savings, starting balance, and goal type are the four inputs that the user should enter. It will compute and display the number of weeks and days the user must save in order to reach the desired amount based on those inputs.
 
 Inputs:
+
 The user needs to enters these 4 inputs, which include 3 text fields and 1 drop-down button:
 
 - Target Amount
@@ -25,7 +26,8 @@ Process:
    - Convert the leftover into days.
 
 Output:
-The result will be shown in AlertDialog, more like a popup message, which includes a message telling the user how long they need to reach their target amount in week(s) and day(s).
+
+The result will be shown in AlertDialog, more like a popup message, which includes a message telling the user how long they need to reach their target amount in week(s) and day(s). Aside from that, it will display another reached target result, indicating that the target has been reached. 
 
 Widget List Used:
 - Text
@@ -44,18 +46,16 @@ Widget List Used:
 Basic Validation Approach:
 1. Convert input from TextField using double.tryParse()
 2. Validate each input:
-    
-    - Target amount must be greater than 0.
-    - Planning saving must be greater than 0.
-    - Starting balance must be 0 or more.
-3. If any input is incorrect:
-    
-    - A specific error flag which are (targetError, savingError, balanceError) is set to true.
-    - The calculation stops.
-    -TextField showing a red border to show error indicators.
-4. If input are valid:
-    
-    - The app completes the calculation and displays a dialog with results.
+   - Target amount must be greater than 0.
+   - Planning savings must be greater than 0.
+   - Starting balance must be 0 or more.
+4. If any input is incorrect:
+   - A specific error flag, which (targetError, savingError, and balanceError) is set to true.
+   - The calculation stops.
+   - TextField showing a red border to show error indicators.
+6. If input is valid:
+The app completes the calculation and displays a dialog with results.
+
 
 Authorship Note with signature: 
 
