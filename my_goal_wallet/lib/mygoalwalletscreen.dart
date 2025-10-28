@@ -363,7 +363,6 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
         context: context,
         builder: (context) => AlertDialog(
           backgroundColor: Colors.amber[50],
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           title: Text(
             "Goal Status",
             style: TextStyle(
@@ -376,9 +375,18 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
             style: TextStyle(fontSize: 14, color: Colors.brown.shade900),
           ),
           actions: [
-            TextButton(
+            ElevatedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("OK", style: TextStyle(color: Colors.brown.shade800)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.brown.shade800, // brown color
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                'OK',
+                style: TextStyle(fontSize: 13, color: Colors.white),
+              ),
             ),
           ],
         ),
