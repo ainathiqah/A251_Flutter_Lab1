@@ -10,7 +10,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: SplashScreen());
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+    );
   }
 }
 
@@ -50,9 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             SizedBox(height: 10),
-            CircularProgressIndicator(
-               color: Colors.brown.shade900,
-            ),
+            CircularProgressIndicator(color: Colors.brown.shade900),
             SizedBox(height: 20),
           ],
         ),

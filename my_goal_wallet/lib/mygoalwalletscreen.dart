@@ -27,13 +27,14 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
           'My Goal Wallet App',
           style: TextStyle(
             color: Colors.brown.shade900,
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.amber[50],
         elevation: 0, //remove default shadow (to blend with the backgroud)
       ),
+      //Container
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -53,10 +54,21 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
             ),
             width: 450,
 
+            //Text Title
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                //target amount
+                Text(
+                  "My Goal Wallet Saving Calculator",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown.shade800,
+                  ),
+                ),
+                SizedBox(height: 18),
+
+                //TextField Target amount
                 Row(
                   children: [
                     SizedBox(
@@ -117,6 +129,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                 ),
                 SizedBox(height: 15),
 
+                //TextField Saving per Week
                 Row(
                   children: [
                     SizedBox(
@@ -143,7 +156,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                           }
                         },
                         decoration: InputDecoration(
-                          hintText: "Enter your planning saving / week",
+                          hintText: "Enter your planning saving",
                           hintStyle: TextStyle(fontSize: 14),
                           border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
@@ -177,7 +190,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                 ),
                 SizedBox(height: 15),
 
-                //balance
+                //TextField Balance
                 Row(
                   children: [
                     SizedBox(
@@ -238,6 +251,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                 ),
                 SizedBox(height: 15),
 
+                //DropDownButton Goal type
                 Row(
                   children: [
                     Text(
@@ -276,23 +290,29 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                 ),
                 SizedBox(height: 15),
 
+                //ElevatedButton Calculate
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
                       onPressed: () => calculateWeeks(),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.brown.shade800, // brown color
+                        backgroundColor: Colors.brown.shade800,
                         padding: EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 15,
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       child: Text(
                         'Calculate',
-                        style: TextStyle(fontSize: 13, color: Colors.white),
+                        style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ),
+
+                    //ElevatedButton Reset
                     ElevatedButton(
                       onPressed: () {
                         targetAmount.clear();
@@ -302,15 +322,18 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                         setState(() {});
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.brown.shade800, // brown color
+                        backgroundColor: Colors.brown.shade800,
                         padding: EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 15,
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                       child: Text(
                         'Reset',
-                        style: TextStyle(fontSize: 13, color: Colors.white),
+                        style: TextStyle(fontSize: 14, color: Colors.white),
                       ),
                     ),
                   ],
@@ -334,6 +357,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
     double savePerWeek = double.tryParse(saving.text) ?? 0; //must be >0
     double? startBalance = double.tryParse(balance.text); //allow 0
 
+    //error handling
     bool hasError = false;
 
     if (target <= 0) {
@@ -356,8 +380,13 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
       return;
     }
 
+    //calculation part
     double remaining = target - startBalance!;
+    double exactWeeks = remaining / savePerWeek;
+    int fullWeeks = exactWeeks.floor();
+    int extraDays = ((exactWeeks - fullWeeks) * 7).ceil();
 
+    //output result (already reached the target)
     if (remaining <= 0) {
       showDialog(
         context: context,
@@ -371,7 +400,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
             ),
           ),
           content: Text(
-            "You already reached your target",
+            "You already reached your target.",
             style: TextStyle(fontSize: 14, color: Colors.brown.shade900),
           ),
           actions: [
@@ -385,18 +414,14 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
               ),
               child: Text(
                 'OK',
-                style: TextStyle(fontSize: 13, color: Colors.white),
+                style: TextStyle(fontSize: 14, color: Colors.white),
               ),
             ),
           ],
         ),
       );
     }
-
-    double exactWeeks = remaining / savePerWeek;
-    int fullWeeks = exactWeeks.floor();
-    int extraDays = ((exactWeeks - fullWeeks) * 7).ceil();
-
+    //output result (weeks needed)
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -424,7 +449,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
             ),
             child: Text(
               'OK',
-              style: TextStyle(fontSize: 13, color: Colors.white),
+              style: TextStyle(fontSize: 14, color: Colors.white),
             ),
           ),
         ],
