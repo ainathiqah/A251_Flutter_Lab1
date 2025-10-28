@@ -12,10 +12,10 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
   TextEditingController targetAmount = TextEditingController();
   TextEditingController saving = TextEditingController();
   TextEditingController balance = TextEditingController();
-  //Declare the default goal type
+  //declare the default goal type
   String selectGoalType = "Others";
 
-  //Declaration for track if a field has an error
+  //declaration for track if a field has an error
   bool targetError = false;
   bool savingError = false;
   bool balanceError = false;
@@ -98,7 +98,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                         decoration: InputDecoration(
                           hintText: "Enter your target amount",
                           hintStyle: TextStyle(fontSize: 14),
-                          //When the field is NOT focused
+                          //when the field is NOT focused
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: targetError
@@ -107,7 +107,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                               width: 2,
                             ),
                           ),
-                          //When the user is typing (field focused)
+                          //when the user is typing (field focused)
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: targetError
@@ -160,7 +160,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                         decoration: InputDecoration(
                           hintText: "Enter your planning saving",
                           hintStyle: TextStyle(fontSize: 14),
-                          //When the field is NOT focused
+                          //when the field is NOT focused
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: savingError
@@ -169,7 +169,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                               width: 2,
                             ),
                           ),
-                          //When the user is typing (field focused)
+                          //when the user is typing (field focused)
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: savingError
@@ -222,7 +222,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                         decoration: InputDecoration(
                           hintText: "Enter your starting balance",
                           hintStyle: TextStyle(fontSize: 14),
-                          //When the field is NOT focused
+                          //when the field is NOT focused
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: balanceError
@@ -231,7 +231,7 @@ class _MyGoalWalletScreenState extends State<MyGoalWalletScreen> {
                               width: 2,
                             ),
                           ),
-                          //When the user is typing (field focused)
+                          //when the user is typing (field focused)
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: balanceError
